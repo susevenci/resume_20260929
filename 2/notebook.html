@@ -1,0 +1,1054 @@
+<!DOCTYPE html>
+<html lang="zh-CN" data-page-node-id="4nKzpe7OgHOaUHc5Q45qDs">
+<head data-page-node-id="chwh7uahb89jLDJ13dhcaq">
+<meta charset="UTF-8" data-page-node-id="foSAglqVuGSr0fhRq977QE" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" data-page-node-id="SYUXr1tBzym8ZBWAKuzn0J" />
+<title>我的手札 · A Personal Journal</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" data-page-node-id="tibIGGlek0HupbdXYCKzR7" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin data-page-node-id="RTUl5TyYJXe6QFJUlYzlKt" />
+<link href="https://fonts.googleapis.com/css2?family=Caveat:wght@400;600;700&family=Kalam:wght@300;400;700&family=Ma+Shan+Zheng&family=Noto+Serif+SC:wght@400;600;700&family=ZCOOL+KuaiLe&display=swap" rel="stylesheet" data-page-node-id="lS5kDhYHp0f9CqsUUnFsiJ" />
+<style>
+/* ============ 设计令牌（手帐风） ============ */
+:root{
+  --paper:#f4ecd8;
+  --paper-2:#ebe0c4;
+  --paper-3:#e3d3a8;
+  --ink:#2a231d;
+  --ink-soft:#5b4e3f;
+  --ink-blue:#27496d;
+  --ink-red:#9b3a3a;
+  --ink-green:#5c7a3d;
+  --ink-purple:#7a4d8c;
+  --line:rgba(60,40,20,.18);
+  --line-strong:rgba(60,40,20,.4);
+  --hi-yellow:#fde29a;
+  --hi-pink:#f9c4c4;
+  --hi-blue:#bcd9ec;
+  --hi-green:#cfe3b6;
+  --hi-orange:#f7c89a;
+  --hi-mint:#bfe3d5;
+  --tape:rgba(255,235,150,.6);
+  --shadow:0 8px 22px rgba(60,40,20,.18), 0 2px 4px rgba(60,40,20,.12);
+  --shadow-soft:0 4px 14px rgba(60,40,20,.12);
+}
+*{box-sizing:border-box}
+html,body{margin:0;padding:0}
+body{
+  font-family:"Noto Serif SC","Kalam",serif;
+  color:var(--ink);
+  background:
+    radial-gradient(circle at 20% 10%, rgba(255,220,160,.35), transparent 40%),
+    radial-gradient(circle at 80% 80%, rgba(180,210,200,.3), transparent 45%),
+    repeating-linear-gradient(45deg, rgba(120,90,40,.03) 0 2px, transparent 2px 8px),
+    var(--paper);
+  min-height:100vh;
+  line-height:1.7;
+  padding:24px 16px 80px;
+}
+/* 纸张纹理叠层 */
+body::before{
+  content:"";
+  position:fixed;inset:0;
+  background-image:
+    radial-gradient(rgba(120,90,40,.06) 1px, transparent 1px),
+    radial-gradient(rgba(120,90,40,.04) 1px, transparent 1px);
+  background-size:3px 3px, 7px 7px;
+  background-position:0 0, 1px 1px;
+  pointer-events:none;
+  z-index:0;
+}
+.notebook{
+  position:relative;
+  z-index:1;
+  max-width:1180px;
+  margin:0 auto;
+  background:var(--paper);
+  background-image:
+    linear-gradient(transparent 95%, rgba(120,90,40,.18) 95%),
+    linear-gradient(90deg, transparent 91px, rgba(180,80,120,.25) 91px, rgba(180,80,120,.25) 92px, transparent 92px);
+  background-size:100% 32px, 100% 100%;
+  border:1px solid rgba(120,90,40,.3);
+  border-radius:6px;
+  box-shadow:var(--shadow);
+  padding:48px 56px 56px 96px;
+}
+/* 装订孔装饰 */
+.notebook::before{
+  content:"";
+  position:absolute;
+  left:36px;top:0;bottom:0;
+  border-left:2px dashed rgba(120,90,40,.25);
+}
+/* ============ 顶部 ============ */
+header{
+  position:relative;
+  display:flex;
+  flex-wrap:wrap;
+  align-items:flex-end;
+  justify-content:space-between;
+  gap:16px;
+  padding-bottom:18px;
+  margin-bottom:28px;
+  border-bottom:2px dashed rgba(120,90,40,.35);
+}
+.brand h1{
+  margin:0;
+  font-family:"Ma Shan Zheng","ZCOOL KuaiLe",cursive;
+  font-size:44px;
+  letter-spacing:2px;
+  color:var(--ink-blue);
+  text-shadow:1px 1px 0 rgba(255,255,255,.4);
+}
+.brand .sub{
+  font-family:"Caveat",cursive;
+  font-size:18px;
+  color:var(--ink-soft);
+  margin-top:4px;
+}
+.date-block{
+  display:flex;
+  align-items:center;
+  gap:18px;
+  font-family:"Caveat",cursive;
+  font-size:20px;
+  color:var(--ink-soft);
+}
+.date-block .today{
+  background:var(--hi-yellow);
+  padding:6px 14px;
+  border-radius:4px;
+  transform:rotate(-1.5deg);
+  box-shadow:1px 2px 0 rgba(120,90,40,.2);
+}
+.date-block .tomorrow{
+  background:var(--hi-pink);
+  padding:6px 14px;
+  border-radius:4px;
+  transform:rotate(2deg);
+}
+.toolbar{
+  display:flex;
+  flex-wrap:wrap;
+  gap:8px;
+  margin-top:10px;
+}
+.toolbar button{
+  font-family:"Kalam",cursive;
+  font-size:15px;
+  background:#fff8e7;
+  border:1px solid var(--line-strong);
+  color:var(--ink);
+  padding:6px 14px;
+  border-radius:18px;
+  cursor:pointer;
+  transition:all .2s;
+  box-shadow:1px 2px 0 rgba(120,90,40,.2);
+}
+.toolbar button:hover{
+  background:var(--hi-yellow);
+  transform:translateY(-1px);
+}
+.toolbar button.danger:hover{ background:var(--hi-pink) }
+/* ============ 胶带装饰 ============ */
+.tape{
+  position:absolute;
+  width:110px;height:24px;
+  background:var(--tape);
+  border-left:1px dashed rgba(120,90,40,.3);
+  border-right:1px dashed rgba(120,90,40,.3);
+  transform:rotate(-6deg);
+  pointer-events:none;
+}
+.tape.top-left{top:0;left:30px;transform:rotate(-8deg)}
+.tape.top-right{top:0;right:40px;transform:rotate(7deg);background:rgba(180,210,230,.6)}
+/* ============ 主网格 ============ */
+.grid{
+  display:grid;
+  grid-template-columns:repeat(12, 1fr);
+  gap:22px;
+}
+.card{
+  position:relative;
+  background:rgba(255,252,240,.85);
+  border:1px solid var(--line);
+  border-radius:8px;
+  padding:18px 18px 20px;
+  box-shadow:var(--shadow-soft);
+  transition:transform .2s, box-shadow .2s;
+}
+.card:hover{ box-shadow:var(--shadow) }
+.card::before{
+  content:"";
+  position:absolute;
+  top:-10px;left:24px;
+  width:60px;height:18px;
+  background:rgba(255,235,150,.55);
+  border-left:1px dashed rgba(120,90,40,.3);
+  border-right:1px dashed rgba(120,90,40,.3);
+  transform:rotate(-3deg);
+}
+.card h2{
+  margin:0 0 12px;
+  font-family:"Ma Shan Zheng",cursive;
+  font-size:24px;
+  color:var(--ink-blue);
+  display:flex;
+  align-items:center;
+  gap:8px;
+}
+.card h2 .icon{ font-size:22px }
+.card .hint{
+  font-family:"Caveat",cursive;
+  font-size:14px;
+  color:var(--ink-soft);
+  margin-bottom:8px;
+  opacity:.7;
+}
+/* 模块占比 */
+.col-6{grid-column:span 6}
+.col-4{grid-column:span 4}
+.col-8{grid-column:span 8}
+.col-12{grid-column:span 12}
+@media (max-width:900px){
+  .col-6,.col-4,.col-8{grid-column:span 12}
+  .notebook{padding:32px 24px 36px 56px}
+  .notebook::before{left:24px}
+}
+@media (max-width:560px){
+  .notebook{padding:24px 16px 28px 36px}
+  .notebook::before{left:14px}
+  .brand h1{font-size:34px}
+}
+/* ============ 输入控件 ============ */
+textarea, input[type="text"]{
+  width:100%;
+  font-family:"Kalam","Noto Serif SC",cursive;
+  font-size:16px;
+  color:var(--ink);
+  background:transparent;
+  border:none;
+  border-bottom:1.5px dashed var(--line-strong);
+  padding:6px 2px;
+  outline:none;
+  resize:vertical;
+  line-height:1.7;
+}
+textarea{min-height:90px}
+textarea:focus, input[type="text"]:focus{
+  border-bottom-color:var(--ink-blue);
+  background:rgba(255,235,150,.18);
+}
+.mic{
+  display:inline-flex;
+  align-items:center;
+  gap:4px;
+  background:#fff8e7;
+  border:1px solid var(--line-strong);
+  border-radius:14px;
+  padding:3px 10px;
+  font-family:"Caveat",cursive;
+  font-size:14px;
+  cursor:pointer;
+  color:var(--ink-soft);
+  transition:all .2s;
+}
+.mic:hover{ background:var(--hi-blue) }
+.mic.recording{ background:var(--hi-pink); color:var(--ink-red); animation:pulse 1.2s infinite }
+@keyframes pulse{ 0%,100%{transform:scale(1)} 50%{transform:scale(1.05)} }
+/* ============ 列表项（待办、行程、问题） ============ */
+.list{ display:flex; flex-direction:column; gap:8px; margin-top:4px }
+.row{
+  display:flex;
+  align-items:center;
+  gap:8px;
+  background:rgba(255,252,240,.6);
+  border:1px solid var(--line);
+  border-radius:6px;
+  padding:6px 10px;
+  transition:all .2s;
+}
+.row:hover{ background:rgba(255,235,150,.25) }
+.row input[type="checkbox"]{
+  width:18px;height:18px;cursor:pointer;accent-color:var(--ink-blue);
+}
+.row input[type="time"]{
+  font-family:"Kalam",cursive;
+  font-size:14px;
+  border:none;
+  background:transparent;
+  color:var(--ink-soft);
+  width:90px;
+}
+.row .text{
+  flex:1;
+  font-family:"Kalam",cursive;
+  font-size:16px;
+  border:none;
+  background:transparent;
+  outline:none;
+  padding:2px 0;
+  border-bottom:1px dashed transparent;
+}
+.row .text:focus{ border-bottom-color:var(--line-strong) }
+.row.done .text{ text-decoration:line-through; color:var(--ink-soft); opacity:.6 }
+.row .del{
+  background:transparent;
+  border:none;
+  cursor:pointer;
+  color:var(--ink-soft);
+  font-size:18px;
+  padding:0 4px;
+  border-radius:4px;
+}
+.row .del:hover{ background:var(--hi-pink); color:var(--ink-red) }
+.add-btn{
+  align-self:flex-start;
+  background:transparent;
+  border:1.5px dashed var(--line-strong);
+  color:var(--ink-soft);
+  font-family:"Caveat",cursive;
+  font-size:15px;
+  padding:4px 12px;
+  border-radius:14px;
+  cursor:pointer;
+  margin-top:6px;
+}
+.add-btn:hover{ background:var(--hi-yellow); color:var(--ink) }
+/* ============ 奇思妙想便签墙 ============ */
+.sticky-wall{
+  display:grid;
+  grid-template-columns:repeat(auto-fill, minmax(150px, 1fr));
+  gap:12px;
+  margin-top:6px;
+}
+.sticky{
+  position:relative;
+  padding:14px 12px 16px;
+  font-family:"Caveat","Kalam",cursive;
+  font-size:16px;
+  color:var(--ink);
+  min-height:110px;
+  box-shadow:2px 4px 8px rgba(60,40,20,.18);
+  border-radius:3px;
+  transform:rotate(var(--r,0deg));
+  transition:transform .2s;
+  word-break:break-word;
+  cursor:pointer;
+}
+.sticky:hover{ transform:rotate(0deg) scale(1.03) }
+.sticky.c1{ background:var(--hi-yellow) }
+.sticky.c2{ background:var(--hi-pink) }
+.sticky.c3{ background:var(--hi-blue) }
+.sticky.c4{ background:var(--hi-green) }
+.sticky.c5{ background:var(--hi-orange) }
+.sticky.c6{ background:var(--hi-mint) }
+.sticky .close{
+  position:absolute;top:4px;right:6px;
+  background:transparent;border:none;
+  font-size:16px;cursor:pointer;
+  color:rgba(0,0,0,.4);
+}
+.sticky .close:hover{ color:var(--ink-red) }
+.sticky textarea{
+  font-family:inherit;
+  font-size:inherit;
+  background:transparent;
+  border:none;
+  outline:none;
+  resize:none;
+  width:100%;
+  min-height:80px;
+  color:inherit;
+}
+/* ============ 学习进度 ============ */
+.progress-list{ display:flex; flex-direction:column; gap:14px; margin-top:8px }
+.prog-item .head{
+  display:flex;align-items:center;gap:8px;
+  font-family:"Kalam",cursive;font-size:16px;
+}
+.prog-item input.pname{
+  flex:1;border:none;background:transparent;
+  font-family:"Kalam",cursive;font-size:16px;
+  border-bottom:1.5px dashed var(--line);
+  padding:2px 0;
+}
+.prog-item input.pname:focus{ outline:none; border-bottom-color:var(--ink-blue) }
+.prog-item input.pct{
+  width:60px;border:none;background:transparent;
+  font-family:"Caveat",cursive;font-size:18px;color:var(--ink-blue);
+  text-align:right;
+}
+.bar{
+  height:8px;
+  background:rgba(120,90,40,.15);
+  border-radius:6px;
+  overflow:hidden;
+  margin-top:4px;
+}
+.bar > div{
+  height:100%;
+  background:linear-gradient(90deg, var(--ink-green), var(--hi-green));
+  border-radius:6px;
+  transition:width .4s;
+}
+/* ============ 日记区 ============ */
+.diary-area{
+  background:rgba(255,252,240,.7);
+  border:1px dashed var(--line);
+  border-radius:6px;
+  padding:12px;
+  font-family:"Kalam","Noto Serif SC",cursive;
+}
+.diary-area textarea{
+  width:100%;
+  min-height:160px;
+  border:none;
+  background:transparent;
+  font-family:inherit;
+  font-size:16px;
+  outline:none;
+  resize:vertical;
+  line-height:2;
+}
+/* ============ 卡片颜色变体 ============ */
+.card.tone-blue{ border-top:3px solid var(--ink-blue) }
+.card.tone-red{ border-top:3px solid var(--ink-red) }
+.card.tone-green{ border-top:3px solid var(--ink-green) }
+.card.tone-purple{ border-top:3px solid var(--ink-purple) }
+.card.tone-orange{ border-top:3px solid #c47a3d }
+/* ============ 印章/角标 ============ */
+.stamp{
+  position:absolute;
+  top:14px;right:14px;
+  font-family:"Caveat",cursive;
+  font-size:13px;
+  color:var(--ink-red);
+  border:2px solid var(--ink-red);
+  border-radius:50%;
+  padding:4px 8px;
+  opacity:.65;
+  transform:rotate(12deg);
+  letter-spacing:1px;
+}
+/* ============ 底部统计 ============ */
+.stats{
+  margin-top:30px;
+  padding-top:18px;
+  border-top:2px dashed rgba(120,90,40,.3);
+  display:flex;
+  flex-wrap:wrap;
+  gap:14px;
+  font-family:"Caveat",cursive;
+  color:var(--ink-soft);
+  font-size:16px;
+  justify-content:space-between;
+}
+.stats span{ background:rgba(255,252,240,.7); padding:4px 12px; border-radius:14px; border:1px solid var(--line) }
+/* ============ Toast ============ */
+#toast{
+  position:fixed;
+  bottom:24px;left:50%;
+  transform:translateX(-50%) translateY(40px);
+  background:var(--ink);
+  color:#fff8e7;
+  padding:10px 22px;
+  border-radius:22px;
+  font-family:"Kalam",cursive;
+  opacity:0;
+  transition:all .3s;
+  z-index:99;
+  box-shadow:var(--shadow);
+}
+#toast.show{ opacity:1; transform:translateX(-50%) translateY(0) }
+/* ============ 文件输入隐藏 ============ */
+.hidden-input{ display:none }
+</style>
+</head>
+<body data-page-node-id="FRBHGbMtc4XiVkbextjf24">
+
+<div class="notebook" id="notebook" data-page-node-id="xREhDOuUCXHypY7W3ElE5v">
+  <span class="tape top-left" data-page-node-id="2pH9MwSRqLgEFf2dpjjTBi"></span>
+  <span class="tape top-right" data-page-node-id="7pqE9FNNndjSH94dSjyI8f"></span>
+
+  <!-- ==================== Header ==================== -->
+  <header data-page-node-id="bMYVWipuQ2iDtHyqAUmASf">
+    <div class="brand" data-page-node-id="6AbPnKoFEhVhsvruwACHgA">
+      <h1 data-page-node-id="R7lktBRThDLCcwQAv0D4w8">📓 我的手札</h1>
+      <div class="sub" data-page-node-id="Ad8BgKEjoN5UpHqdDRXDpu">a quiet place for your mind · v1.0</div>
+    </div>
+    <div class="date-block" data-page-node-id="qOiC31TpZAnUfeo5iU95tD">
+      <div class="today" id="todayLabel" data-page-node-id="OMxWIZVEi356XsgTARHsEk">—</div>
+      <div data-page-node-id="rRSsYPp5CwGwdhyEJD0u3O">→</div>
+      <div class="tomorrow" id="tomorrowLabel" data-page-node-id="BwU2q8FXwVsAFFm2rZoBYv">—</div>
+    </div>
+    <div class="toolbar" data-page-node-id="EOHNt8BN8R6scE6xVnQ7jD">
+      <button id="btnExport" data-page-node-id="ENei7lWwIsti6u0mYFg222">📤 导出 JSON</button>
+      <button id="btnImport" data-page-node-id="bNMDCQpYSCNtPgEgwPExTz">📥 导入</button>
+      <button id="btnMD" data-page-node-id="Gafvz7oxBBxxPzLA6D44Py">📝 导出 Markdown</button>
+      <button id="btnClear" class="danger" data-page-node-id="oiGfxNrIFNGXEoJ5UmzQyy">🧹 清空今日</button>
+    </div>
+    <input type="file" id="fileInput" accept="application/json" class="hidden-input" data-page-node-id="KCozKvU0C4By1MxSaFfzwM" />
+  </header>
+
+  <!-- ==================== Main Grid ==================== -->
+  <main class="grid" data-page-node-id="UEvWOwyJO4N1DOmAkAxc7r">
+
+    <!-- 明日行程 -->
+    <section class="card col-6 tone-blue" data-page-node-id="TFATkzUYDxUfLNWS8aHPrw">
+      <span class="stamp" data-page-node-id="9Jah37QHMqs3TiajcJpiEy">明日</span>
+      <h2 data-page-node-id="iKQWDzJ2yl6kCenfEaegQP"><span class="icon" data-page-node-id="lpnHBeZlA83Ny7Xt7IeGFN">🗓️</span>明日行程</h2>
+      <div class="hint" data-page-node-id="9p3yEjCgHMznGZBsxD8qys">为明天做一个温柔的时间安排</div>
+      <div class="list" id="scheduleList" data-page-node-id="bfEzQbbkmwP6GG6xhWsO0d"></div>
+      <button class="add-btn" data-add="schedule" data-page-node-id="bAFoVSzqRz0rgmqqlWVwEC">＋ 新增时段</button>
+    </section>
+
+    <!-- 待办事项 -->
+    <section class="card col-6 tone-red" data-page-node-id="mB5hq2zxGRXscFAmBbrnnH">
+      <span class="stamp" data-page-node-id="JgmgZjvR0HMbg3UHyFMVHo">To-Do</span>
+      <h2 data-page-node-id="2IsFGvTaQIBO7pKatkNO0u"><span class="icon" data-page-node-id="fvZdq98eDIXfxIxvzlwRCf">✅</span>待办事项</h2>
+      <div class="hint" data-page-node-id="dBfINBPzNHtqWjWXVVZnVn">勾选完成，享受小小的成就感</div>
+      <div class="list" id="todoList" data-page-node-id="WgJO7sxEZVqbhApFQZqjfH"></div>
+      <button class="add-btn" data-add="todo" data-page-node-id="gxxqCFCN77IlrlCBbl983j">＋ 新增待办</button>
+    </section>
+
+    <!-- 奇思妙想便签墙 -->
+    <section class="card col-8 tone-orange" data-page-node-id="ILAnDO4Sa0EBhHDJQGaoVA">
+      <span class="stamp" data-page-node-id="WUvy1eTCeaT7HZvfKcvP0V">灵感</span>
+      <h2 data-page-node-id="mT9mKX0nTtKEKd75ugMbqu"><span class="icon" data-page-node-id="9sqwwmsfaSgqOarIchqwqB">💡</span>奇思妙想</h2>
+      <div class="hint" data-page-node-id="yNyvJXComtEWz5B7Muzg5J">把闪念写下来，别让灵感逃走</div>
+      <div class="sticky-wall" id="stickyWall" data-page-node-id="olPWC9NRSIAhMlCvGJEHZm"></div>
+      <button class="add-btn" data-add="sticky" data-page-node-id="wlBDPRazcxpGtqOMAj39MQ">＋ 新增便签</button>
+    </section>
+
+    <!-- 待解决问题 -->
+    <section class="card col-4 tone-purple" data-page-node-id="YvmJ4iLq1t8DT7XZJtLrSb">
+      <span class="stamp" data-page-node-id="69uPAwnSx6tG67qYf4ts2y">疑问</span>
+      <h2 data-page-node-id="LayLqLz01ZpT3YEe6H9z43"><span class="icon" data-page-node-id="dmdYeBlt01w3m5FFkPbEBI">❓</span>待解决问题</h2>
+      <div class="hint" data-page-node-id="9jSrwYQEJwkn2D3NHAvR1o">不明白的事，先记下来</div>
+      <div class="list" id="questionList" data-page-node-id="bwQD5Pu4sb0z2L8biTWXNF"></div>
+      <button class="add-btn" data-add="question" data-page-node-id="daZIdcqzRu8MbMqVR7utpz">＋ 新增问题</button>
+    </section>
+
+    <!-- 日记 -->
+    <section class="card col-6 tone-green" data-page-node-id="F1y3SUcUQNBCykiq8FRlrF">
+      <span class="stamp" data-page-node-id="NZBrUsf2Gznu1c5S93NwEX">日记</span>
+      <h2 data-page-node-id="8Xv07AohMNfMIYtsxNWEc0"><span class="icon" data-page-node-id="nhJnziGVIU0U5cCjtra0OY">📔</span>今日日记</h2>
+      <div class="hint" data-page-node-id="FMwDLUnZoy7DAyyV6KQAAC">写给未来的自己</div>
+      <div class="diary-area" data-page-node-id="ebm0wNi6GnhRUUAvNEE9pE">
+        <textarea id="diaryText" placeholder="今天发生了什么呢……"></textarea>
+      </div>
+      <div style="display:flex;justify-content:space-between;align-items:center;margin-top:8px;" data-page-node-id="7tBlTdsFGg4zxZ6qGwjDdb">
+        <span class="mic" data-target="diaryText" data-page-node-id="HwRe1LIp6VWKHBaCD6GlD4">🎙 语音输入</span>
+        <span style="font-family:'Caveat',cursive;color:var(--ink-soft);font-size:14px;" data-page-node-id="CvUoNqRQHorY1RA8PnXZ2r"><span id="diaryCount" data-page-node-id="sDGui23IeQ1lyXWFqGzgBN">0</span> 字</span>
+      </div>
+    </section>
+
+    <!-- 学习进度 -->
+    <section class="card col-6 tone-blue" data-page-node-id="ZXSHG8aQiyEQbBhR2az7JP">
+      <span class="stamp" data-page-node-id="Z3r25nF5jAtdsaiyWuYEUH">进步</span>
+      <h2 data-page-node-id="ewlTHTRjOGBmNiN1zqkEbv"><span class="icon" data-page-node-id="goWT5LwNxACMQjfJQKMJQM">📚</span>学习进度</h2>
+      <div class="hint" data-page-node-id="CrdUhcIqHVqNT22D0FnDzN">把大目标拆成可观察的进度条</div>
+      <div class="progress-list" id="progressList" data-page-node-id="BHSZFxQy0foXd7BklOCw2L"></div>
+      <button class="add-btn" data-add="progress" data-page-node-id="jC72EREnVXLMrUnvRtur6P">＋ 新增学习项</button>
+    </section>
+
+    <!-- 感悟与思考 -->
+    <section class="card col-12 tone-purple" data-page-node-id="PWrwOzwQcMisTQzFoofHUI">
+      <span class="stamp" data-page-node-id="mnoNJ6UaLaxOuNbsBYenQ7">沉淀</span>
+      <h2 data-page-node-id="sH44Jlww3SNatiFMoFaNQu"><span class="icon" data-page-node-id="XVf1Dl2tNh6xDAxpFX6DRw">🌱</span>感悟与思考</h2>
+      <div class="hint" data-page-node-id="ex5ZvRrsvgVeLPbb5NLnAE">把零散的思绪沉淀成文字</div>
+      <textarea id="reflectionText" placeholder="今天有什么触动你的思考？想通了什么？还困惑什么？"></textarea>
+      <div style="display:flex;justify-content:space-between;align-items:center;margin-top:8px;" data-page-node-id="TiRj7qj9G4M9nFHWaVshbc">
+        <span class="mic" data-target="reflectionText" data-page-node-id="YdcRmBa8YiQVDnoVF8uOuN">🎙 语音输入</span>
+        <span style="font-family:'Caveat',cursive;color:var(--ink-soft);font-size:14px;" data-page-node-id="V3Y8f47qFtrhSB6OKZEti7"><span id="reflectionCount" data-page-node-id="B96h4vkmJ15XuwYg4a6Sta">0</span> 字</span>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- 底部统计 -->
+  <div class="stats" data-page-node-id="PY7Rrblze4oBadVDbq8DVW">
+    <span data-page-node-id="y6gzZo02zrsxLUgzHMKxJq">📅 <span id="statDate" data-page-node-id="4JNrlPJzatdR26VK204Vvr">—</span></span>
+    <span data-page-node-id="lDWQP0giI3UApsnZZsQsuA">🗓 行程 <span id="statSchedule" data-page-node-id="CCZHOkxGxbfR3wYZtYevZX">0</span></span>
+    <span data-page-node-id="XvsB4PAubDRxfekNHXYZdk">✅ 待办 <span id="statTodo" data-page-node-id="aaLi9IVE8sBTFYulzaa7Rt">0</span> / <span id="statTodoDone" data-page-node-id="ge6qJ4g8MtuOvys12fKRQ7">0</span></span>
+    <span data-page-node-id="kLIFFiAuxumWJvon6kxyme">💡 便签 <span id="statSticky" data-page-node-id="3GcP3c6nTgHDgYBow5bFM7">0</span></span>
+    <span data-page-node-id="NooRQY2Vfp3MRMzLz2uXkg">📚 学习项 <span id="statProgress" data-page-node-id="kEIlMUBLyGM50du9dNFCse">0</span></span>
+    <span data-page-node-id="PR69CkKLNzLMlC9vEZw3oj">❓ 问题 <span id="statQuestion" data-page-node-id="FSZfHWwmOKjxQC6hY36xkw">0</span></span>
+    <span data-page-node-id="hNiQnvfmIZcsddi23oowNz">📝 字数 <span id="statWords" data-page-node-id="vN4Ps5O8Fk5MCdLs0RmHLX">0</span></span>
+  </div>
+</div>
+
+<div id="toast" data-page-node-id="FXzQRpjSGAfcJhca8m6Rlq"></div>
+
+<script>
+/* =====================================================
+   状态管理
+===================================================== */
+const STORE_KEY = 'shouzha-notebook-v1';
+
+const defaultState = () => ({
+  meta: { version: 1, updatedAt: '' },
+  schedule: [],
+  todos: [],
+  sticky: [],
+  questions: [],
+  progress: [],
+  diary: '',
+  reflection: ''
+});
+
+let state = loadState();
+
+function loadState(){
+  try{
+    const raw = localStorage.getItem(STORE_KEY);
+    if(!raw) return defaultState();
+    const obj = JSON.parse(raw);
+    return Object.assign(defaultState(), obj);
+  }catch(e){
+    console.warn('读取本地数据失败', e);
+    return defaultState();
+  }
+}
+function saveState(){
+  state.meta.updatedAt = new Date().toISOString();
+  localStorage.setItem(STORE_KEY, JSON.stringify(state));
+  updateStats();
+}
+
+/* =====================================================
+   通用工具
+===================================================== */
+const $ = (s, p=document) => p.querySelector(s);
+const $$ = (s, p=document) => Array.from(p.querySelectorAll(s));
+const uid = () => Math.random().toString(36).slice(2, 10);
+function toast(msg){
+  const t = $('#toast');
+  t.textContent = msg;
+  t.classList.add('show');
+  clearTimeout(toast._t);
+  toast._t = setTimeout(()=> t.classList.remove('show'), 1800);
+}
+function formatDate(d){
+  const wk = ['周日','周一','周二','周三','周四','周五','周六'][d.getDay()];
+  return `${d.getFullYear()}/${String(d.getMonth()+1).padStart(2,'0')}/${String(d.getDate()).padStart(2,'0')} · ${wk}`;
+}
+function tomorrow(){
+  const t = new Date(); t.setDate(t.getDate()+1);
+  return t;
+}
+function countChars(s){ return (s||'').replace(/\s/g,'').length }
+
+/* =====================================================
+   顶部日期
+===================================================== */
+function renderDates(){
+  $('#todayLabel').textContent = formatDate(new Date());
+  $('#tomorrowLabel').textContent = formatDate(tomorrow());
+  $('#statDate').textContent = formatDate(new Date());
+}
+
+/* =====================================================
+   渲染：明日行程
+===================================================== */
+function renderSchedule(){
+  const box = $('#scheduleList');
+  box.innerHTML = '';
+  state.schedule.forEach(item => {
+    const row = document.createElement('div');
+    row.className = 'row';
+    row.innerHTML = `
+      <input type="time" value="${item.time||''}" />
+      <input class="text" type="text" placeholder="安排内容…" value="${escape(item.text)}" />
+      <button class="del" title="删除">✕</button>
+    `;
+    const [t, txt, del] = row.children;
+    t.addEventListener('change', e => { item.time = e.target.value; saveState(); });
+    txt.addEventListener('input', e => { item.text = e.target.value; saveState(); });
+    del.addEventListener('click', () => {
+      state.schedule = state.schedule.filter(x => x.id !== item.id);
+      saveState(); renderSchedule();
+    });
+    box.appendChild(row);
+  });
+}
+
+/* =====================================================
+   渲染：待办事项
+===================================================== */
+function renderTodos(){
+  const box = $('#todoList');
+  box.innerHTML = '';
+  state.todos.forEach(item => {
+    const row = document.createElement('div');
+    row.className = 'row' + (item.done ? ' done' : '');
+    row.innerHTML = `
+      <input type="checkbox" ${item.done?'checked':''} />
+      <input class="text" type="text" placeholder="要做的事…" value="${escape(item.text)}" />
+      <button class="del" title="删除">✕</button>
+    `;
+    const [chk, txt, delBtn] = row.children;
+    chk.addEventListener('change', e => {
+      item.done = e.target.checked;
+      saveState();
+      renderTodos();
+      updateStats();
+    });
+    txt.addEventListener('input', e => { item.text = e.target.value; saveState(); updateStats(); });
+    delBtn.addEventListener('click', () => {
+      state.todos = state.todos.filter(x => x.id !== item.id);
+      saveState(); renderTodos(); updateStats();
+    });
+    box.appendChild(row);
+  });
+}
+
+/* =====================================================
+   渲染：奇思妙想便签
+===================================================== */
+const COLORS = ['c1','c2','c3','c4','c5','c6'];
+function renderSticky(){
+  const box = $('#stickyWall');
+  box.innerHTML = '';
+  state.sticky.forEach(item => {
+    const div = document.createElement('div');
+    const r = (Math.random()*6 - 3).toFixed(1);
+    div.className = `sticky ${item.color||'c1'}`;
+    div.style.setProperty('--r', `${r}deg`);
+    div.innerHTML = `
+      <button class="close" title="删除">✕</button>
+      <textarea placeholder="一个念头…">${escape(item.text)}</textarea>
+    `;
+    const [closeBtn, ta] = div.children;
+    ta.addEventListener('input', e => { item.text = e.target.value; saveState(); updateStats(); });
+    closeBtn.addEventListener('click', e => {
+      e.stopPropagation();
+      state.sticky = state.sticky.filter(x => x.id !== item.id);
+      saveState(); renderSticky(); updateStats();
+    });
+    box.appendChild(div);
+  });
+}
+
+/* =====================================================
+   渲染：待解决问题
+===================================================== */
+function renderQuestions(){
+  const box = $('#questionList');
+  box.innerHTML = '';
+  state.questions.forEach(item => {
+    const row = document.createElement('div');
+    row.className = 'row' + (item.resolved ? ' done' : '');
+    row.innerHTML = `
+      <input type="checkbox" ${item.resolved?'checked':''} title="已解决" />
+      <input class="text" type="text" placeholder="一个问题…" value="${escape(item.text)}" />
+      <button class="del" title="删除">✕</button>
+    `;
+    const [chk, txt, delBtn] = row.children;
+    chk.addEventListener('change', e => { item.resolved = e.target.checked; saveState(); renderQuestions(); updateStats(); });
+    txt.addEventListener('input', e => { item.text = e.target.value; saveState(); });
+    delBtn.addEventListener('click', () => {
+      state.questions = state.questions.filter(x => x.id !== item.id);
+      saveState(); renderQuestions(); updateStats();
+    });
+    box.appendChild(row);
+  });
+}
+
+/* =====================================================
+   渲染：学习进度
+===================================================== */
+function renderProgress(){
+  const box = $('#progressList');
+  box.innerHTML = '';
+  state.progress.forEach(item => {
+    const wrap = document.createElement('div');
+    wrap.className = 'prog-item';
+    wrap.innerHTML = `
+      <div class="head">
+        <input class="pname" type="text" placeholder="学习主题…" value="${escape(item.name)}" />
+        <input class="pct" type="number" min="0" max="100" value="${item.pct}" />%
+        <button class="del" title="删除">✕</button>
+      </div>
+      <div class="bar"><div style="width:${item.pct}%"></div></div>
+    `;
+    const [nameInput, pctInput, delBtn] = wrap.querySelector('.head').children;
+    const bar = wrap.querySelector('.bar > div');
+    nameInput.addEventListener('input', e => { item.name = e.target.value; saveState(); });
+    pctInput.addEventListener('input', e => {
+      let v = parseInt(e.target.value || 0, 10);
+      if(isNaN(v)) v = 0;
+      v = Math.max(0, Math.min(100, v));
+      item.pct = v;
+      bar.style.width = v + '%';
+      saveState();
+    });
+    delBtn.addEventListener('click', () => {
+      state.progress = state.progress.filter(x => x.id !== item.id);
+      saveState(); renderProgress(); updateStats();
+    });
+    box.appendChild(wrap);
+  });
+}
+
+/* =====================================================
+   文本域：日记、感悟
+===================================================== */
+function bindTextarea(id, key, countId){
+  const ta = $('#'+id), ct = $('#'+countId);
+  ta.value = state[key] || '';
+  const update = () => {
+    state[key] = ta.value;
+    saveState();
+    ct.textContent = countChars(ta.value);
+  };
+  ta.addEventListener('input', update);
+  ct.textContent = countChars(ta.value);
+}
+function bindTextareas(){
+  bindTextarea('diaryText', 'diary', 'diaryCount');
+  bindTextarea('reflectionText', 'reflection', 'reflectionCount');
+}
+
+/* =====================================================
+   添加按钮
+===================================================== */
+function bindAdds(){
+  $$('.add-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const type = btn.dataset.add;
+      switch(type){
+        case 'schedule':
+          state.schedule.push({ id: uid(), time: '09:00', text: '' });
+          saveState(); renderSchedule();
+          setTimeout(()=> $('#scheduleList .row:last-child .text')?.focus(), 50);
+          break;
+        case 'todo':
+          state.todos.push({ id: uid(), text: '', done: false });
+          saveState(); renderTodos();
+          setTimeout(()=> $('#todoList .row:last-child .text')?.focus(), 50);
+          break;
+        case 'sticky':
+          state.sticky.push({ id: uid(), text: '', color: COLORS[state.sticky.length % COLORS.length] });
+          saveState(); renderSticky();
+          setTimeout(()=> $('#stickyWall .sticky:last-child textarea')?.focus(), 50);
+          break;
+        case 'question':
+          state.questions.push({ id: uid(), text: '', resolved: false });
+          saveState(); renderQuestions();
+          setTimeout(()=> $('#questionList .row:last-child .text')?.focus(), 50);
+          break;
+        case 'progress':
+          state.progress.push({ id: uid(), name: '', pct: 0 });
+          saveState(); renderProgress();
+          setTimeout(()=> $('#progressList .prog-item:last-child .pname')?.focus(), 50);
+          break;
+      }
+      updateStats();
+    });
+  });
+}
+
+/* =====================================================
+   语音输入 (Web Speech API)
+===================================================== */
+let recognition = null;
+function initSpeech(){
+  const SR = window.SpeechRecognition || window.webkitSpeechRecognition;
+  if(!SR){
+    $$('.mic').forEach(b => {
+      b.style.opacity = '.4';
+      b.title = '当前浏览器不支持语音输入（请使用 Chrome / Edge）';
+    });
+    return;
+  }
+  recognition = new SR();
+  recognition.lang = 'zh-CN';
+  recognition.interimResults = true;
+  recognition.continuous = true;
+
+  let activeBtn = null, activeTa = null, baseText = '';
+
+  recognition.onresult = e => {
+    let interim = '', final = '';
+    for(let i = e.resultIndex; i < e.results.length; i++){
+      const r = e.results[i];
+      if(r.isFinal) final += r[0].transcript;
+      else interim += r[0].transcript;
+    }
+    if(final){ baseText += final; }
+    if(activeTa){
+      activeTa.value = baseText + interim;
+      activeTa.dispatchEvent(new Event('input'));
+    }
+  };
+  recognition.onerror = e => {
+    console.warn('语音识别错误', e.error);
+    toast('语音识别出错：' + e.error);
+    if(activeBtn) activeBtn.classList.remove('recording');
+  };
+  recognition.onend = () => {
+    if(activeBtn) activeBtn.classList.remove('recording');
+    activeBtn = null; activeTa = null;
+  };
+
+  $$('.mic').forEach(btn => {
+    btn.addEventListener('click', () => {
+      if(activeBtn === btn){
+        recognition.stop();
+        return;
+      }
+      if(activeBtn){ recognition.stop(); }
+      const targetId = btn.dataset.target;
+      activeTa = $('#'+targetId);
+      if(!activeTa) return;
+      baseText = activeTa.value ? activeTa.value.replace(/\s+$/,'') + ' ' : '';
+      activeBtn = btn;
+      btn.classList.add('recording');
+      try{ recognition.start(); toast('开始聆听…'); }
+      catch(e){ toast('请稍后再试'); }
+    });
+  });
+}
+
+/* =====================================================
+   工具栏：导出、导入、清空
+===================================================== */
+function bindToolbar(){
+  $('#btnExport').addEventListener('click', () => {
+    const blob = new Blob([JSON.stringify(state, null, 2)], { type: 'application/json' });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = `手札-${new Date().toISOString().slice(0,10)}.json`;
+    a.click();
+    URL.revokeObjectURL(url);
+    toast('已导出 JSON ✨');
+  });
+
+  $('#btnImport').addEventListener('click', () => $('#fileInput').click());
+  $('#fileInput').addEventListener('change', e => {
+    const f = e.target.files[0];
+    if(!f) return;
+    const r = new FileReader();
+    r.onload = ev => {
+      try{
+        const obj = JSON.parse(ev.target.result);
+        if(obj && typeof obj === 'object'){
+          state = Object.assign(defaultState(), obj);
+          saveState();
+          renderAll();
+          toast('已导入 ✨');
+        }
+      }catch(err){ toast('文件格式不正确'); }
+    };
+    r.readAsText(f);
+    e.target.value = '';
+  });
+
+  $('#btnMD').addEventListener('click', exportMarkdown);
+
+  $('#btnClear').addEventListener('click', () => {
+    if(!confirm('确定要清空所有今日记录吗？建议先导出备份。')) return;
+    state = defaultState();
+    saveState();
+    renderAll();
+    toast('已清空');
+  });
+}
+
+function exportMarkdown(){
+  const today = formatDate(new Date());
+  const tomorrowStr = formatDate(tomorrow());
+  let md = `# 📓 我的手札 · ${today}\n\n`;
+  md += `> 一个安静的手帐，记录你的行程、灵感、思考与成长。\n\n`;
+
+  md += `## 🗓️ 明日行程（${tomorrowStr}）\n`;
+  if(state.schedule.length === 0) md += `_（暂无）_\n`;
+  else state.schedule.forEach(it => { md += `- **${it.time||'--:--'}** ${it.text||''}\n`; });
+  md += '\n';
+
+  md += `## ✅ 待办事项\n`;
+  if(state.todos.length === 0) md += `_（暂无）_\n`;
+  else state.todos.forEach(it => { md += `- [${it.done?'x':' '}] ${it.text||''}\n`; });
+  md += '\n';
+
+  md += `## 💡 奇思妙想\n`;
+  if(state.sticky.length === 0) md += `_（暂无）_\n`;
+  else state.sticky.forEach(it => { md += `- ${it.text||''}\n`; });
+  md += '\n';
+
+  md += `## ❓ 待解决问题\n`;
+  if(state.questions.length === 0) md += `_（暂无）_\n`;
+  else state.questions.forEach(it => { md += `- [${it.resolved?'x':' '}] ${it.text||''}\n`; });
+  md += '\n';
+
+  md += `## 📚 学习进度\n`;
+  if(state.progress.length === 0) md += `_（暂无）_\n`;
+  else state.progress.forEach(it => { md += `- **${it.name||''}** — ${it.pct}%\n`; });
+  md += '\n';
+
+  md += `## 📔 今日日记\n\n${state.diary || '_（空白）_'}\n\n`;
+  md += `## 🌱 感悟与思考\n\n${state.reflection || '_（空白）_'}\n\n`;
+  md += `---\n_由我的手札生成于 ${new Date().toLocaleString()}_\n`;
+
+  const blob = new Blob([md], { type: 'text/markdown' });
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a');
+  a.href = url;
+  a.download = `手札-${new Date().toISOString().slice(0,10)}.md`;
+  a.click();
+  URL.revokeObjectURL(url);
+  toast('已导出 Markdown ✨');
+}
+
+/* =====================================================
+   统计
+===================================================== */
+function updateStats(){
+  $('#statSchedule').textContent = state.schedule.length;
+  $('#statTodo').textContent = state.todos.length;
+  $('#statTodoDone').textContent = state.todos.filter(x=>x.done).length;
+  $('#statSticky').textContent = state.sticky.length;
+  $('#statProgress').textContent = state.progress.length;
+  $('#statQuestion').textContent = state.questions.length;
+  const wc = countChars(state.diary) + countChars(state.reflection)
+    + state.sticky.reduce((s,x)=>s+countChars(x.text),0)
+    + state.schedule.reduce((s,x)=>s+countChars(x.text),0)
+    + state.todos.reduce((s,x)=>s+countChars(x.text),0)
+    + state.questions.reduce((s,x)=>s+countChars(x.text),0);
+  $('#statWords').textContent = wc;
+}
+
+/* =====================================================
+   HTML 转义
+===================================================== */
+function escape(s){
+  return String(s==null?'':s).replace(/[&<>"']/g, c => ({
+    '&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'
+  })[c]);
+}
+
+/* =====================================================
+   渲染入口
+===================================================== */
+function renderAll(){
+  renderDates();
+  renderSchedule();
+  renderTodos();
+  renderSticky();
+  renderQuestions();
+  renderProgress();
+  bindTextareas();
+  updateStats();
+}
+
+window.addEventListener('DOMContentLoaded', () => {
+  renderAll();
+  bindAdds();
+  bindToolbar();
+  initSpeech();
+});
+</script>
+</body>
+</html>

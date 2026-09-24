@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>周家弘 - 个人简历</title>
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Microsoft YaHei", sans-serif;
+      line-height: 1.6;
+      color: #333;
+      background: #fafafa;
+      padding: 20px 16px;
+    }
+    .container {
+      max-width: 720px;
+      margin: 0 auto;
+      background: #fff;
+      border-radius: 8px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+      padding: 24px 20px;
+    }
+    /* 顶部：姓名 + 一句话介绍 */
+    .header {
+      text-align: center;
+      margin-bottom: 28px;
+      padding-bottom: 20px;
+      border-bottom: 1px solid #eee;
+    }
+    .name {
+      font-size: 28px;
+      font-weight: 700;
+      color: #1a1a1a;
+      margin-bottom: 10px;
+    }
+    .intro {
+      font-size: 15px;
+      color: #666;
+    }
+    /* 通用区块标题 */
+    .section-title {
+      font-size: 16px;
+      font-weight: 600;
+      color: #1a1a1a;
+      margin-bottom: 16px;
+      padding-bottom: 6px;
+      border-bottom: 2px solid #1a1a1a;
+    }
+    /* 个人优势 */
+    .strengths {
+      margin-bottom: 28px;
+    }
+    .strength-item {
+      margin-bottom: 16px;
+      padding-left: 12px;
+      border-left: 3px solid #2563eb;
+    }
+    .strength-title {
+      font-size: 15px;
+      font-weight: 600;
+      color: #1a1a1a;
+      margin-bottom: 6px;
+    }
+    .strength-desc {
+      font-size: 14px;
+      color: #555;
+      line-height: 1.7;
+    }
+    /* 工作经历 */
+    .experience {
+      margin-bottom: 28px;
+    }
+    .exp-item {
+      margin-bottom: 20px;
+      padding-left: 12px;
+      border-left: 2px solid #e5e7eb;
+    }
+    .exp-header {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      align-items: baseline;
+      margin-bottom: 10px;
+    }
+    .exp-company {
+      font-size: 15px;
+      font-weight: 600;
+      color: #1a1a1a;
+    }
+    .exp-role {
+      font-size: 14px;
+      color: #2563eb;
+      font-weight: 500;
+    }
+    .exp-time {
+      font-size: 13px;
+      color: #888;
+      margin-left: auto;
+    }
+    .exp-duties {
+      font-size: 14px;
+      color: #444;
+      line-height: 1.8;
+      padding-left: 18px;
+    }
+    .exp-duties li {
+      margin-bottom: 4px;
+    }
+    /* 底部联系方式 */
+    .contact {
+      text-align: center;
+      padding-top: 20px;
+      border-top: 1px solid #eee;
+    }
+    .contact-label {
+      font-size: 14px;
+      color: #888;
+      margin-bottom: 4px;
+    }
+    .contact-email {
+      font-size: 15px;
+      color: #2563eb;
+      text-decoration: none;
+      word-break: break-all;
+    }
+    .contact-email:hover {
+      text-decoration: underline;
+    }
+    /* 响应式调整 */
+    @media (max-width: 480px) {
+      body { padding: 12px 10px; }
+      .container { padding: 20px 16px; }
+      .name { font-size: 24px; }
+      .intro { font-size: 14px; }
+      .exp-header { flex-direction: column; align-items: flex-start; gap: 4px; }
+      .exp-time { margin-left: 0; }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <!-- 顶部：姓名 + 一句话介绍 -->
+    <header class="header">
+      <h1 class="name">周家弘</h1>
+      <p class="intro">学习agent应用中，基于AI辅助的编程框架开发</p>
+    </header>
+
+    <!-- 个人优势 -->
+    <section class="strengths">
+      <h2 class="section-title">个人优势</h2>
+
+      <div class="strength-item">
+        <div class="strength-title">规划：从目的为导向，反推进行规划</div>
+        <div class="strength-desc">以目标为起点逆向拆解路径，明确关键节点与资源需求，确保执行路径高效可控。</div>
+      </div>
+
+      <div class="strength-item">
+        <div class="strength-title">自学：利用AI、Agent、互联网的优势不断学习</div>
+        <div class="strength-desc">善于结合大模型与智能体工具快速获取新知识，建立个人知识飞轮，持续迭代技能栈。</div>
+      </div>
+
+      <div class="strength-item">
+        <div class="strength-title">团队：在比赛与项目中进行团队分工与任务拆解</div>
+        <div class="strength-desc">擅长依据成员特长拆解任务、制定协作规范，推动跨角色协同高效交付成果。</div>
+      </div>
+    </section>
+
+    <!-- 工作经历 -->
+    <section class="experience">
+      <h2 class="section-title">工作经历</h2>
+
+      <!-- 经历二（时间更近，排在前面） -->
+      <article class="exp-item">
+        <div class="exp-header">
+          <span class="exp-company">广东科学技术职业学院</span>
+          <span class="exp-role">参赛者</span>
+          <time class="exp-time" datetime="2026-09">2026.9</time>
+        </div>
+        <ul class="exp-duties">
+          <li>撰写全国大学生创业大赛项目计划书，完成商业模式设计与市场分析</li>
+          <li>统筹项目资料收集与整理，协调团队成员完成各章节撰写任务</li>
+          <li>制作路演汇报材料，提炼核心亮点并优化答辩逻辑</li>
+        </ul>
+      </article>
+
+      <!-- 经历一 -->
+      <article class="exp-item">
+        <div class="exp-header">
+          <span class="exp-company">广东科学技术职业学院</span>
+          <span class="exp-role">参赛者</span>
+          <time class="exp-time" datetime="2025-10">2025.10</time>
+        </div>
+        <ul class="exp-duties">
+          <li>负责数学建模竞赛数据挖掘环节，完成原始数据获取与特征工程</li>
+          <li>执行数据清洗与预处理，处理缺失值、异常值及格式标准化</li>
+          <li>协助构建预测模型，输出可视化分析报告支撑论文撰写</li>
+        </ul>
+      </article>
+    </section>
+
+    <!-- 底部联系方式 -->
+    <footer class="contact">
+      <p class="contact-label">联系方式</p>
+      <a href="mailto:susevenci@163.com" class="contact-email">susevenci@163.com</a>
+    </footer>
+  </div>
+</body>
+</html>

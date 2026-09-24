@@ -1,0 +1,473 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+  <meta name="format-detection" content="telephone=no">
+  <title>席位申请 · 企业管理者闭门沙龙</title>
+  <style>
+    /* ============ 基础重置 ============ */
+    *, *::before, *::after {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    html, body { height: 100%; }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "PingFang SC", "Helvetica Neue", "Microsoft YaHei", "Hiragino Sans GB", sans-serif;
+      background: #ffffff;
+      color: #0a2540;
+      font-size: 16px;
+      line-height: 1.5;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
+
+    .page {
+      max-width: 540px;
+      margin: 0 auto;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      padding: 0 28px;
+      position: relative;
+    }
+
+    /* ============ 顶部品牌 ============ */
+    .brand {
+      padding: 36px 0 24px;
+      display: flex;
+      align-items: baseline;
+      justify-content: space-between;
+    }
+
+    .brand-mark {
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: 4px;
+      color: #0a2540;
+    }
+
+    .brand-meta {
+      font-size: 11px;
+      letter-spacing: 2px;
+      color: #8898aa;
+    }
+
+    /* ============ 主标题 ============ */
+    .hero {
+      padding: 16px 0 24px;
+      border-bottom: 1px solid #eef1f5;
+    }
+
+    .hero-eyebrow {
+      font-size: 11px;
+      letter-spacing: 2px;
+      color: #8898aa;
+      margin-bottom: 10px;
+    }
+
+    .hero-title {
+      font-size: 24px;
+      line-height: 1.4;
+      color: #0a2540;
+      font-weight: 700;
+    }
+
+    /* ============ 元信息 ============ */
+    .meta {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+      padding: 18px 0;
+      border-bottom: 1px solid #eef1f5;
+    }
+
+    .meta-label {
+      font-size: 11px;
+      color: #8898aa;
+      letter-spacing: 1.5px;
+      margin-bottom: 6px;
+    }
+
+    .meta-value {
+      font-size: 14px;
+      color: #0a2540;
+      font-weight: 500;
+    }
+
+    /* ============ 表单 ============ */
+    .form { padding: 28px 0 0; }
+
+    .form-section-title {
+      font-size: 13px;
+      font-weight: 600;
+      color: #0a2540;
+      margin-bottom: 18px;
+      letter-spacing: 1px;
+    }
+
+    .form-group { margin-bottom: 18px; }
+
+    .form-label {
+      display: block;
+      font-size: 13px;
+      color: #0a2540;
+      margin-bottom: 8px;
+      font-weight: 500;
+    }
+
+    .required {
+      color: #c8102e;
+      margin-left: 3px;
+      font-weight: 400;
+    }
+
+    .form-input {
+      width: 100%;
+      height: 50px;
+      padding: 0 16px;
+      font-size: 16px; /* 防止 iOS 自动缩放 */
+      color: #0a2540;
+      background: #ffffff;
+      border: 1.5px solid #d4dbe5;
+      border-radius: 8px;
+      outline: none;
+      font-family: inherit;
+      transition: border-color 0.2s ease, background-color 0.2s ease;
+    }
+
+    .form-input:focus { border-color: #0a2540; }
+
+    .form-input::placeholder {
+      color: #b8c2cf;
+      font-weight: 300;
+    }
+
+    .form-input.has-error {
+      border-color: #c8102e;
+      background: #fffafb;
+    }
+
+    .form-error {
+      display: none;
+      font-size: 12px;
+      color: #c8102e;
+      margin-top: 6px;
+      padding-left: 2px;
+      letter-spacing: 0.3px;
+    }
+
+    .form-error.show { display: block; }
+
+    /* ============ 隐私 & 按钮 ============ */
+    .privacy {
+      font-size: 11px;
+      color: #8898aa;
+      line-height: 1.7;
+      margin-top: 6px;
+      margin-bottom: 24px;
+      letter-spacing: 0.3px;
+    }
+
+    .submit-btn {
+      width: 100%;
+      height: 54px;
+      background: #0a2540;
+      color: #ffffff;
+      border: none;
+      border-radius: 8px;
+      font-size: 16px;
+      font-weight: 600;
+      letter-spacing: 6px;
+      cursor: pointer;
+      font-family: inherit;
+    }
+
+    .submit-btn:active { background: #061a30; }
+    .submit-btn:disabled { background: #8898aa; cursor: not-allowed; }
+
+    /* ============ 紧迫感 ============ */
+    .urgency {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-top: 16px;
+      font-size: 12px;
+      color: #c8102e;
+      letter-spacing: 1.5px;
+    }
+
+    .urgency-dot {
+      display: inline-block;
+      width: 6px;
+      height: 6px;
+      background: #c8102e;
+      border-radius: 50%;
+      margin-right: 8px;
+    }
+
+    /* ============ 底部 ============ */
+    .footer {
+      margin-top: auto;
+      padding: 28px 0;
+      text-align: center;
+    }
+
+    .footer-text {
+      font-size: 11px;
+      color: #8898aa;
+      letter-spacing: 1.5px;
+    }
+
+    /* ============ 切换 ============ */
+    .form-container.hide { display: none; }
+
+    /* ============ 成功页 ============ */
+    .success {
+      display: none;
+      flex: 1;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      padding: 60px 0;
+    }
+
+    .success.show { display: flex; }
+
+    .success-seal {
+      width: 64px;
+      height: 64px;
+      border: 1.5px solid #0a2540;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 28px;
+    }
+
+    .success-seal svg {
+      width: 26px;
+      height: 26px;
+      stroke: #0a2540;
+    }
+
+    .success-title {
+      font-size: 22px;
+      color: #0a2540;
+      font-weight: 700;
+      margin-bottom: 4px;
+      letter-spacing: 2px;
+    }
+
+    .success-divider {
+      width: 32px;
+      height: 1px;
+      background: #0a2540;
+      margin: 22px 0;
+    }
+
+    .success-desc {
+      font-size: 14px;
+      color: #5a6b80;
+      line-height: 1.75;
+      max-width: 280px;
+      letter-spacing: 0.5px;
+    }
+
+    .success-footer {
+      position: absolute;
+      bottom: 28px;
+      left: 0;
+      right: 0;
+      text-align: center;
+    }
+
+    .success-footer-text {
+      font-size: 11px;
+      color: #8898aa;
+      letter-spacing: 1.5px;
+    }
+
+    /* ============ 小屏适配 ============ */
+    @media (max-width: 360px) {
+      .hero-title { font-size: 21px; }
+      .page { padding: 0 20px; }
+    }
+  </style>
+</head>
+<body>
+  <div class="page">
+
+    <!-- ============ 表单页 ============ -->
+    <div class="form-container" id="formContainer">
+
+      <header class="brand">
+        <div class="brand-mark">SUMMIT</div>
+        <div class="brand-meta">2026 · AUTUMN</div>
+      </header>
+
+      <section class="hero">
+        <div class="hero-eyebrow">ENTERPRISE LEADERS FORUM</div>
+        <h1 class="hero-title">企业管理者闭门沙龙<br>席位申请</h1>
+      </section>
+
+      <section class="meta">
+        <div>
+          <div class="meta-label">时间</div>
+          <div class="meta-value">10.18 周五 14:00</div>
+        </div>
+        <div>
+          <div class="meta-label">地点</div>
+          <div class="meta-value">上海 · 静安</div>
+        </div>
+      </section>
+
+      <form class="form" id="signupForm" novalidate>
+        <div class="form-section-title">请填写您的信息</div>
+
+        <div class="form-group">
+          <label class="form-label" for="name">姓名<span class="required">*</span></label>
+          <input class="form-input" type="text" id="name" placeholder="您的真实姓名" autocomplete="name">
+          <div class="form-error" id="nameError">请输入姓名</div>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label" for="phone">手机号<span class="required">*</span></label>
+          <input class="form-input" type="tel" id="phone" placeholder="11 位手机号码" autocomplete="tel" inputmode="numeric" maxlength="11">
+          <div class="form-error" id="phoneError">请输入正确的 11 位手机号</div>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label" for="company">公司<span class="required">*</span></label>
+          <input class="form-input" type="text" id="company" placeholder="公司全称" autocomplete="organization">
+          <div class="form-error" id="companyError">请输入公司名称</div>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label" for="title">职务<span class="required">*</span></label>
+          <input class="form-input" type="text" id="title" placeholder="如:总经理 / VP / 创始人" autocomplete="organization-title">
+          <div class="form-error" id="titleError">请输入您的职务</div>
+        </div>
+
+        <p class="privacy">提交即视为同意主办方将信息用于本次沙龙报名与通知。</p>
+
+        <button type="submit" class="submit-btn">锁 定 席 位</button>
+
+        <p class="urgency"><span class="urgency-dot"></span>仅剩 7 个席位</p>
+      </form>
+
+      <footer class="footer">
+        <div class="footer-text">主办方保留最终参与资格审核权</div>
+      </footer>
+    </div>
+
+    <!-- ============ 成功页 ============ -->
+    <div class="success" id="successPage">
+      <div class="success-seal">
+        <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="square" stroke-linejoin="miter">
+          <polyline points="5 12 10 17 19 7"></polyline>
+        </svg>
+      </div>
+      <h2 class="success-title">报名成功</h2>
+      <div class="success-divider"></div>
+      <p class="success-desc">我们会在 1 个工作日内短信通知您席位。</p>
+
+      <div class="success-footer">
+        <div class="success-footer-text">SUMMIT 2026 · 期待与您相见</div>
+      </div>
+    </div>
+
+  </div>
+
+  <script>
+    (function () {
+      const form = document.getElementById('signupForm');
+      const formContainer = document.getElementById('formContainer');
+      const successPage = document.getElementById('successPage');
+
+      // 校验规则
+      const fields = {
+        name: {
+          el: document.getElementById('name'),
+          errorEl: document.getElementById('nameError'),
+          validate: (v) => v.trim().length > 0
+        },
+        phone: {
+          el: document.getElementById('phone'),
+          errorEl: document.getElementById('phoneError'),
+          // 中国大陆手机号:1 开头,第二位 3-9,共 11 位数字
+          validate: (v) => /^1[3-9]\d{9}$/.test(v.trim())
+        },
+        company: {
+          el: document.getElementById('company'),
+          errorEl: document.getElementById('companyError'),
+          validate: (v) => v.trim().length > 0
+        },
+        title: {
+          el: document.getElementById('title'),
+          errorEl: document.getElementById('titleError'),
+          validate: (v) => v.trim().length > 0
+        }
+      };
+
+      function showError(field) {
+        field.el.classList.add('has-error');
+        field.errorEl.classList.add('show');
+      }
+
+      function clearError(field) {
+        field.el.classList.remove('has-error');
+        field.errorEl.classList.remove('show');
+      }
+
+      // 输入时清除错误状态;手机号在失焦时即时校验
+      Object.values(fields).forEach((field) => {
+        field.el.addEventListener('input', () => clearError(field));
+
+        if (field.el.id === 'phone') {
+          field.el.addEventListener('blur', () => {
+            const v = field.el.value.trim();
+            if (v.length > 0 && !field.validate(v)) {
+              showError(field);
+            }
+          });
+        }
+      });
+
+      // 提交
+      form.addEventListener('submit', (e) => {
+        e.preventDefault();
+
+        let firstInvalid = null;
+        Object.values(fields).forEach((field) => {
+          if (!field.validate(field.el.value)) {
+            showError(field);
+            if (!firstInvalid) firstInvalid = field.el;
+          }
+        });
+
+        if (firstInvalid) {
+          firstInvalid.focus();
+          return;
+        }
+
+        // 模拟提交 -> 切换至成功页
+        const btn = form.querySelector('.submit-btn');
+        btn.disabled = true;
+        btn.textContent = '提 交 中';
+
+        setTimeout(() => {
+          formContainer.classList.add('hide');
+          successPage.classList.add('show');
+          window.scrollTo(0, 0);
+        }, 700);
+      });
+    })();
+  </script>
+</body>
+</html>
