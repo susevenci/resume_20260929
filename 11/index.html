@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>周家弘 - 个人简历</title>
+  <link rel="stylesheet" href="resume.css">
+</head>
+<body>
+  <!-- 顶部导航栏：可直接跳转栏目，右侧显示当前所在栏目 -->
+  <nav class="topbar" aria-label="页面导航">
+    <span class="topbar-brand">周家弘 · 简历</span>
+    <div class="nav">
+      <a class="nav-link" href="#strengths" data-target="strengths">个人优势</a>
+      <a class="nav-link" href="#experience" data-target="experience">工作经历</a>
+      <a class="nav-link" href="#contact" data-target="contact">联系方式</a>
+    </div>
+    <span class="topbar-status">当前：<b id="currentSection">个人优势</b></span>
+  </nav>
+
+  <div class="container">
+    <!-- 顶部：姓名 + 一句话介绍 -->
+    <header class="header reveal" id="top">
+      <h1 class="name">周家弘</h1>
+      <p class="intro">学习agent应用中，基于AI辅助的编程框架开发</p>
+    </header>
+
+    <!-- 个人优势 -->
+    <section class="strengths reveal anchor" id="strengths">
+      <h2 class="section-title">个人优势</h2>
+
+      <div class="strength-list">
+        <div class="strength-item">
+          <div class="strength-title">规划：从目的为导向，反推进行规划</div>
+          <div class="strength-desc">以目标为起点逆向拆解路径，明确关键节点与资源需求，确保执行路径高效可控。</div>
+        </div>
+
+        <div class="strength-item">
+          <div class="strength-title">自学：利用AI、Agent、互联网的优势不断学习</div>
+          <div class="strength-desc">善于结合大模型与智能体工具快速获取新知识，建立个人知识飞轮，持续迭代技能栈。</div>
+        </div>
+
+        <div class="strength-item">
+          <div class="strength-title">团队：在比赛与项目中进行团队分工与任务拆解</div>
+          <div class="strength-desc">擅长依据成员特长拆解任务、制定协作规范，推动跨角色协同高效交付成果。</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 工作经历 -->
+    <section class="experience reveal anchor" id="experience">
+      <h2 class="section-title">工作经历</h2>
+
+      <div class="timeline">
+        <!-- 经历二（时间更近，排在前面） -->
+        <article class="exp-item">
+          <div class="exp-header">
+            <span class="exp-company">广东科学技术职业学院</span>
+            <span class="exp-role">参赛者</span>
+            <time class="exp-time" datetime="2026-09">2026.9</time>
+          </div>
+          <ul class="exp-duties">
+            <li>撰写全国大学生创业大赛项目计划书，完成商业模式设计与市场分析</li>
+            <li>统筹项目资料收集与整理，协调团队成员完成各章节撰写任务</li>
+            <li>制作路演汇报材料，提炼核心亮点并优化答辩逻辑</li>
+          </ul>
+        </article>
+
+        <!-- 经历一 -->
+        <article class="exp-item">
+          <div class="exp-header">
+            <span class="exp-company">广东科学技术职业学院</span>
+            <span class="exp-role">参赛者</span>
+            <time class="exp-time" datetime="2025-10">2025.10</time>
+          </div>
+          <ul class="exp-duties">
+            <li>负责数学建模竞赛数据挖掘环节，完成原始数据获取与特征工程</li>
+            <li>执行数据清洗与预处理，处理缺失值、异常值及格式标准化</li>
+            <li>协助构建预测模型，输出可视化分析报告支撑论文撰写</li>
+          </ul>
+        </article>
+      </div>
+    </section>
+
+    <!-- 底部联系方式 -->
+    <footer class="contact reveal anchor" id="contact">
+      <p class="contact-label">联系方式</p>
+      <a href="mailto:susevenci@163.com" class="contact-email">susevenci@163.com</a>
+    </footer>
+  </div>
+
+  <!-- 回到顶部按钮 -->
+  <button class="to-top" id="toTop" type="button" aria-label="回到顶部" title="回到顶部">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"
+         stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+      <path d="M12 19V5"></path>
+      <path d="M5 12l7-7 7 7"></path>
+    </svg>
+  </button>
+
+  <script src="resume.js"></script>
+</body>
+</html>
