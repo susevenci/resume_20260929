@@ -4,23 +4,65 @@
    ========================================================================== */
 
 :root {
-  /* ---- 配色 ---- */
+  /* ---- 配色（浅色模式） ---- */
   --bg-base: #f5f6f8;        /* 页面底色：极浅灰 */
   --bg-panel: #ffffff;       /* 容器/卡片底色：白 */
   --bg-panel-2: #ffffff;     /* 卡片底色 */
   --bg-panel-3: #f7f9fc;     /* 卡片悬浮底色 */
+  --bg-header: linear-gradient(180deg, #f8fafd 0%, #ffffff 100%);
+  --bg-chip: #ffffff;        /* 胶囊/小圆点内底色 */
+  --bg-topbar: rgba(255, 255, 255, 0.86);
+  --bg-nav-hover: rgba(30, 58, 138, 0.06);
   --line: #e3e7ee;           /* 分割线 */
   --line-soft: #edf0f5;      /* 更弱的分割线 */
+  --line-hover: rgba(30, 58, 138, 0.28);
   --text-1: #1f2937;         /* 大标题：深灰 */
   --text-2: #3f4a5a;         /* 正文 */
   --text-3: #7b8698;         /* 次要信息：中灰 */
   --accent: #1e3a8a;         /* 藏蓝点缀 */
   --accent-soft: #2b4c9b;    /* 藏蓝（浅一档） */
   --accent-dim: rgba(30, 58, 138, 0.08);
+  --on-accent: #ffffff;      /* 藏蓝底上的文字色 */
   --shadow-sm: 0 1px 3px rgba(23, 37, 62, 0.06), 0 6px 18px rgba(23, 37, 62, 0.06);
   --shadow-md: 0 10px 26px rgba(23, 37, 62, 0.12);
   --radius-lg: 14px;
   --radius-md: 10px;
+}
+
+/* ---- 配色（深色模式） ---- */
+[data-theme="dark"] {
+  --bg-base: #10151f;        /* 页面底色：深灰蓝 */
+  --bg-panel: #161c28;       /* 容器底色 */
+  --bg-panel-2: #1a2130;     /* 卡片底色 */
+  --bg-panel-3: #202a3c;     /* 卡片悬浮底色 */
+  --bg-header: linear-gradient(180deg, #1b2333 0%, #161c28 100%);
+  --bg-chip: #1f2735;
+  --bg-topbar: rgba(16, 21, 31, 0.86);
+  --bg-nav-hover: rgba(147, 180, 255, 0.10);
+  --line: #2a3446;
+  --line-soft: #232c3c;
+  --line-hover: rgba(147, 180, 255, 0.42);
+  --text-1: #eef2f8;         /* 大标题：近白 */
+  --text-2: #c3ccda;         /* 正文 */
+  --text-3: #8a95a8;         /* 次要信息 */
+  --accent: #93b4ff;         /* 深色下的藏蓝点缀（提亮） */
+  --accent-soft: #b3caff;
+  --accent-dim: rgba(147, 180, 255, 0.14);
+  --on-accent: #10151f;
+  --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.4), 0 6px 18px rgba(0, 0, 0, 0.32);
+  --shadow-md: 0 10px 26px rgba(0, 0, 0, 0.5);
+}
+
+/* 主题切换过渡 */
+body,
+.container,
+.header,
+.strength-item,
+.exp-item,
+.topbar,
+.intro,
+.to-top {
+  transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
 }
 
 * {
@@ -65,7 +107,7 @@ body {
   padding: 56px 34px 40px;
   margin-bottom: 34px;
   border-bottom: 1px solid var(--line);
-  background: linear-gradient(180deg, #f8fafd 0%, #ffffff 100%);
+  background: var(--bg-header);
 }
 
 /* 名片上方的一抹藏蓝细线 */
@@ -98,7 +140,7 @@ body {
   padding: 6px 16px;
   border: 1px solid var(--line);
   border-radius: 999px;
-  background: #fff;
+  background: var(--bg-chip);
 }
 
 /* ============ 区块标题（二级层级） ============ */
@@ -161,7 +203,7 @@ body {
 .strength-item:hover {
   transform: translateY(-6px);
   background: var(--bg-panel-3);
-  border-color: rgba(30, 58, 138, 0.28);
+  border-color: var(--line-hover);
   box-shadow: var(--shadow-md);
 }
 
@@ -218,7 +260,7 @@ body {
   width: 11px;
   height: 11px;
   border-radius: 50%;
-  background: #fff;
+  background: var(--bg-chip);
   border: 2px solid var(--accent);
   transition: background 0.28s ease;
 }
@@ -226,7 +268,7 @@ body {
 .exp-item:hover {
   transform: translateY(-4px);
   background: var(--bg-panel-3);
-  border-color: rgba(30, 58, 138, 0.28);
+  border-color: var(--line-hover);
   box-shadow: var(--shadow-md);
 }
 
@@ -326,7 +368,7 @@ body {
   align-items: center;
   gap: 16px;
   padding: 12px 24px;
-  background: rgba(255, 255, 255, 0.86);
+  background: var(--bg-topbar);
   -webkit-backdrop-filter: blur(12px);
   backdrop-filter: blur(12px);
   border-bottom: 1px solid var(--line);
@@ -364,7 +406,7 @@ body {
 
 .nav-link:hover {
   color: var(--text-1);
-  background: rgba(30, 58, 138, 0.06);
+  background: var(--bg-nav-hover);
 }
 
 .nav-link.is-active {
@@ -404,6 +446,44 @@ body {
   50% { opacity: 0.4; transform: scale(0.82); }
 }
 
+/* ============ 主题切换开关（右上角） ============ */
+.theme-toggle {
+  margin-left: 12px;
+  width: 34px;
+  height: 34px;
+  flex: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--text-2);
+  background: transparent;
+  border: 1px solid var(--line);
+  border-radius: 50%;
+  cursor: pointer;
+  transition: color 0.25s ease, border-color 0.25s ease, background 0.25s ease;
+}
+
+.theme-toggle:hover {
+  color: var(--accent);
+  border-color: var(--line-hover);
+  background: var(--bg-nav-hover);
+}
+
+.theme-toggle:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+}
+
+.theme-toggle svg {
+  width: 17px;
+  height: 17px;
+}
+
+/* 浅色模式显示月亮（点击进入深色），深色模式显示太阳 */
+.theme-toggle .icon-sun { display: none; }
+[data-theme="dark"] .theme-toggle .icon-sun { display: block; }
+[data-theme="dark"] .theme-toggle .icon-moon { display: none; }
+
 /* ============ 回到顶部按钮 ============ */
 .to-top {
   position: fixed;
@@ -415,7 +495,7 @@ body {
   display: flex;
   align-items: center;
   justify-content: center;
-  color: #fff;
+  color: var(--on-accent);
   background: var(--accent);
   border: 1px solid var(--accent);
   border-radius: 50%;
