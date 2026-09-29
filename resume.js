@@ -148,6 +148,16 @@
     });
   }
 
+  /* ---------- 功能：打印简历 ---------- */
+  var printBtn = document.getElementById('printBtn');
+
+  if (printBtn) {
+    printBtn.addEventListener('click', function () {
+      // 打印前收起可能存在的地址栏 hash 跳转，保证从顶部开始
+      window.print();
+    });
+  }
+
   // 滚动监听：用 requestAnimationFrame 节流
   var ticking = false;
   window.addEventListener('scroll', function () {
